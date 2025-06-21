@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #msg {
+            margin-top: 20px;
+            padding: 20px;
+            width: fit-content;
+            border: 2px solid red;
+            border-radius: 15px;
+            background-color: rgba(255, 0, 0, 0.203);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="msg">
+        <button id="btn" onclick="hide(this)">Hide</button>
+        <p id="p">1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
+        </p>
+    </div>
+    <div id="msg">
+        <button id="btn" onclick="hide(this)">Hide</button>
+        <p id="p">2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
+        </p>
+    </div>
+    <div id="msg">
+        <button id="btn" onclick="hide(this)">Hide</button>
+        <p id="p">3. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
+        </p>
+    </div>
+    <div id="msg">
+        <button id="btn" onclick="hide(this)">Hide</button>
+        <p id="p">4. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
+        </p>
+    </div>
+    <div id="msg">
+        <button id="btn" onclick="hide(this)">Hide</button>
+        <p id="p">5. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
+        </p>
+    </div>
+    <script>  
+        function hide(button) {
+            button.closest("#msg").style.display = "none"
+        };
+    </script>
+</body>
+
+</html>

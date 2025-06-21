@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #header {
+            display: none;
+            align-items: center;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <h2>String</h2>
+        <h2>Number</h2>
+        <h2>Boolean</h2>
+        <h2>Object</h2>
+        <h2>Function</h2>
+    </header>
+    <button onclick="show()" id="btn">Show Menu</button>
+    <button onclick="hide()" id="btn2" style="display: none;">Hide Menu</button>
+    <script>
+        function show() {
+            header.style.display = "flex";
+            btn2.style.display = "block"
+            btn.style.display = "none";
+        };
+
+        function hide() {
+            header.style.display = "none";
+            btn2.style.display = "none"
+            btn.style.display = "block";
+        };
+    </script>
+</body>
+</html>

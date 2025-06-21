@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <script src="https://kit.fontawesome.com/150ee104be.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(235, 231, 225);
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            max-width: 1200px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            gap: 20px;
+        }
+
+        .location {
+            background-color: white;
+            text-align: center;
+        }
+
+        .clock {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background-color: white;
+        }
+
+        .clock__inner {
+            padding: 7px;
+            background-color: aliceblue;
+            border-radius: 7px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="location">Uzbekistan, Tashkent<i class="fa-solid fa-location-dot" style="padding-left: 7px; background-color: white;"></i></h1>
+        <div class="clock">
+            <h1 class="clock__inner" id="hours"></h1>
+            <h1 style="background-color: white;">:</h1>
+            <h1 class="clock__inner" id="minutes"></h1>
+            <h1 style="background-color: white;">:</h1>
+            <h1 class="clock__inner" id="seconds"></h1>
+        </div>
+    </div>
+    <script>
+        let hours = document.getElementById("hours");
+        let minutes = document.getElementById("minutes");
+        let seconds = document.getElementById("seconds");
+
+        setInterval(() => {
+            hours.textContent = new Date().getHours();
+            minutes.textContent = new Date().getMinutes();
+            seconds.textContent = new Date().getSeconds();
+        });
+    </script>
+</body>
+
+</html>

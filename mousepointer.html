@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #field {
+        width: 97, 5vw;
+        height: 95vh;
+        border: 10px solid green;
+    }
+
+    #ball {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: chocolate;
+        border: solid;
+        border-radius: 100%;
+    }
+</style>
+
+<body>
+    <div id="field">
+        <div id="ball"></div>
+    </div>
+    <script>
+        const field = document.getElementById("field");
+        const ball = document.getElementById("ball");
+
+        const bCoSt = getComputedStyle(ball);
+        const fCoSt = getComputedStyle(field);
+
+        document.addEventListener("mousemove", (event) => {
+            if (event.clientY - (parseFloat(bCoSt.height) / 2) > field.offsetTop + parseFloat(fCoSt.borderWidth) && event.clientY < field.offsetTop - parseFloat(fCoSt.borderWidth) + field.clientHeight) {
+                ball.style.top = (event.clientY - (ball.clientHeight / 2)) + "px"
+            }
+            if (event.clientX - (parseFloat(bCoSt.width) / 2) > field.offsetLeft + parseFloat(fCoSt.borderWidth) && event.clientX < field.offsetLeft - parseFloat(fCoSt.borderWidth) + field.clientWidth) {
+                ball.style.left = (event.clientX - (ball.clientWidth / 2)) + "px"
+            }
+        });
+
+        document.addEventListener("wheel", (event) => {
+            if (ball.offsetTop > field.offsetTop + parseFloat(fCoSt.borderWidth) && event.clientY < field.offsetTop - parseFloat(fCoSt.borderWidth) + field.clientHeight) {
+                ball.style.top += event.deltaY + "px"
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

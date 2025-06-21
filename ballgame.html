@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMEBOY</title>
+    <style>
+        #header {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px;
+        }
+
+        #button {
+            width: 100px;
+            height: 40px;
+            margin-top: 21px;
+            margin-bottom: 21px;
+        }
+
+        #field {
+            position: relative; /* Bu qo'shildi */
+            width: 100vw;
+            height: 75vh;
+            background-color: green;
+        }
+
+        #ball {
+            position: absolute; /* Bu qo'shildi */
+            width: 30px;
+            height: 30px;
+            background-color: chocolate;
+            border: 2px solid black;
+            border-radius: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <h1>GAMEBOY</h1>
+        <button onclick="reset()" id="button">Restart</button>
+    </header>
+    <div id="field">
+        <div id="ball"></div>
+    </div>
+    <script>
+        const field = document.getElementById("field");
+        const ball = document.getElementById("ball");
+
+        let corX = 0;
+        let corY = 0;
+        const step = 20;
+
+        function reset() {
+            corX = (field.clientWidth - ball.clientWidth) / 2;
+            corY = (field.clientHeight - ball.clientHeight) / 2;
+            updateCords();
+        }
+
+        function updateCords() {
+            ball.style.left = corX + "px";
+            ball.style.top = corY + "px";
+        }
+
+
+        document.addEventListener("keydown", function(event) {
+            const borderX = field.clientWidth - ball.offsetWidth;
+            const borderY = field.clientHeight - ball.offsetHeight;
+
+            switch(event.key) {
+                case "ArrowLeft":
+                case "a":
+                case "A": 
+                    if(corX > 0) corX -= step;
+                    break;
+                case "ArrowRight":
+                case "d":
+                case "D": 
+                    if(corX < borderX) corX += step;
+                    break;
+                case "ArrowUp":
+                case "w":
+                case "W": 
+                    if(corY > 0) corY -= step;
+                    break;
+                case "ArrowDown":
+                case "s":
+                case "S": 
+                    if(corY < borderY) corY += step;
+                    break;
+            }
+
+            updateCords();
+        });
+
+        reset();
+    </script>
+</body>
+</html>

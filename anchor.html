@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Positioning Demo</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            position: relative; 
+            justify-content: center;
+            align-items: center;
+        }
+        #anchor {
+            width: 300px;
+            height: 300px;
+            background-color: rgb(15, 112, 15);
+            margin: 50px;
+        }
+        #elem {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    <div id="anchor"></div>
+    <div id="elem"></div>
+    <script>
+        const anchor = document.getElementById("anchor");
+        const elem = document.getElementById("elem");
+        const post = prompt("Pozitsiya: ").toLowerCase();
+
+        function positionElement(anchor, position, elem) {
+            elem.style.display = "block";
+
+            const anchorRect = anchor.getBoundingClientRect();
+            const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            
+            switch(position) {
+                case "top":
+                    elem.style.left = `${anchorRect.left + scrollX}px`;
+                    elem.style.top = `${anchorRect.top + scrollY - elem.offsetHeight - 10}px`;
+                    break;
+                case "bottom":
+                    elem.style.left = `${anchorRect.left + scrollX}px`;
+                    elem.style.top = `${anchorRect.bottom + scrollY + 10}px`;
+                    break;
+                case "left":
+                    elem.style.left = `${anchorRect.left + scrollX - elem.offsetWidth - 10}px`;
+                    elem.style.top = `${anchorRect.top + scrollY}px`;
+                    break;
+                case "right":
+                    elem.style.left = `${anchorRect.right + scrollX + 10}px`;
+                    elem.style.top = `${anchorRect.top + scrollY}px`;
+                    break;
+                default:
+                    alert("Noto'g'ri qiymat");
+                    elem.style.display = "none";
+                    break;
+            }
+        }
+
+        positionElement(anchor, post, elem);
+    </script>
+</body>
+</html>

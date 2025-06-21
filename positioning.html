@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div" style="position: absolute; height: 200px; width: 200px; background-color: green;"></div>
+    <script>
+        let x = +prompt("X: ");
+        let y = +prompt("Y: ");
+
+        const div = document.getElementById("div");
+
+        div.style.top = (x - (div.clientHeight / 2)) + "px";
+        div.style.left = (y - (div.clientWidth / 2)) + "px";
+
+    </script>
+</body>
+</html>
