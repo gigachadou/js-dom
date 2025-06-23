@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button data-toggle="subscribe-form">Obuna formasini ko'rsat</button>
+
+    <form id="subscribe-form" hidden>
+        Email: <input type="email">
+    </form>
+    <script>
+        const subscribeForm = document.getElementById("subscribe-form")
+        document.body.addEventListener("click", (event) => {
+            if (event.target.dataset.toggle !=undefined) subscribeForm.hidden = !subscribeForm.hidden;
+        });
+    </script>
+</body>
+
+</html>

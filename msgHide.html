@@ -19,34 +19,36 @@
 
 <body>
     <div id="msg">
-        <button id="btn" onclick="hide(this)">Hide</button>
+        <button id="btn">X</button>
         <p id="p">1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
         </p>
     </div>
     <div id="msg">
-        <button id="btn" onclick="hide(this)">Hide</button>
+        <button id="btn">X</button>
         <p id="p">2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
         </p>
     </div>
     <div id="msg">
-        <button id="btn" onclick="hide(this)">Hide</button>
+        <button id="btn">X</button>
         <p id="p">3. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
         </p>
     </div>
     <div id="msg">
-        <button id="btn" onclick="hide(this)">Hide</button>
+        <button id="btn">X</button>
         <p id="p">4. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
         </p>
     </div>
     <div id="msg">
-        <button id="btn" onclick="hide(this)">Hide</button>
+        <button id="btn">X</button>
         <p id="p">5. Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum laudantium excepturi quidem libero
         </p>
     </div>
-    <script>  
-        function hide(button) {
-            button.closest("#msg").style.display = "none"
-        };
+    <script>
+        document.body.addEventListener("click", function (event) {
+            if (event.target.id == "btn") {
+                event.target.closest("#msg").style.display = "none";
+            }
+        });
     </script>
 </body>
 
