@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>HTML
+        <ul hidden>Head
+            <li hidden>Title</li>
+            <li hidden>Meta</li>
+        </ul>
+        <ul hidden>Body
+            <ul hidden>Section
+                <li hidden>Div</li>
+                <li hidden>P</li>
+            </ul>
+            <li hidden>Script</li>
+        </ul>
+        <ul hidden>Footer
+            <li hidden>H4</li>
+            <li hidden>Link</li>
+            <li hidden>P</li>
+        </ul>
+    </ul>
+
+    <script>
+        document.body.addEventListener("click", function (event) {
+            let children = event.target.children;
+            console.log(event.target.children);
+            for (let child of children) {
+                child.hidden = !child.hidden;
+            };
+        });
+    </script>
+</body>
+
+</html>
