@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #h2 {
+            border: 2px solid red;
+            border-radius: 10px;
+            background-color: rgba(255, 0, 0, 0.336);
+            padding: 5px;
+            width: fit-content;
+        }
+    </style>
+</head>
+
+<body>
+    Sign in:
+    <form class="form">
+        <input id="username" name="username" type="text" placeholder="username">
+        <input id="mail" name="mail" type="text" placeholder="mail">
+        <input id="password" name="password" type="password" placeholder="password">
+
+        <button type="submit">Submit</button>
+    </form>
+    <h2 id="h2" style="display: none;"></h2>
+    <div style="margin-top: 50px;">
+        Search:<br>
+        <input id="findUsername" name="username" type="text" placeholder="Find by username or mail">
+        <button id="findBtn">Find</button>
+        <div id="foundUser" style="display: none;"></div>
+    </div>
+    <script>
+        const h2 = document.getElementById("h2")
+        window.onerror = function (message, source, lineno, colno, error) {
+            h2.textContent = error.message;
+            h2.style.display = "block";
+            return true;
+        };
+
+        const formEl = document.querySelector(".form");
+
+        let username = document.getElementById("username");
+        let mail = document.getElementById("mail");
+        let password = document.getElementById("password");
+
+        formEl.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            if (username.value.trim() === "" || username.value.trim() === "") throw new Error("Form is not filled!")
+            if (password.value.length < 6) throw new Error("Password must be at least 6 characters!");
+
+            const formData = new FormData(formEl);
+            const data = Object.fromEntries(formData);
+
+            localStorage.setItem(username.value, JSON.stringify(data));
+            localStorage.setItem(mail.value, JSON.stringify(data));
+
+            formEl.reset();
+            alert("Registration successful!");
+
+        });
+
+        const findUsername = document.getElementById("findUsername");
+        const findBtn = document.getElementById("findBtn");
+        const foundUser = document.getElementById("foundUser")
+
+        findBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            try {
+                let found = JSON.parse(localStorage.getItem(findUsername.value))
+            } catch (error) {
+                throw new Error("User not found");
+            }
+
+            const found = JSON.parse(localStorage.getItem(findUsername.value))
+
+            if (found && typeof found === 'object') {
+                foundUser.style.display = "block";
+                foundUser.innerHTML = `
+                <p>Username: ${found.username}</p>
+                <p>Email Adress: ${found.mail}</p>`
+            };
+
+        });
+    </script>
+</body>
+
+</html>
