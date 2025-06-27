@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="ul">
+        <li>Christopher Robin</li>
+        <li>Winnie-the-Pooh</li>
+        <li>Tigger</li>
+        <li>Kanga</li>
+        <li>Rabbit. Just rabbit.</li>
+    </ul>
+    <script>
+        const ul = document.getElementById("ul");
+        ul.addEventListener("click", function (event) {
+            if (event.ctrlKey) {
+                event.target.style.backgroundColor = "rgba(255, 255, 0, 0.444)";
+                return;
+            }
+            let col = ul.children;
+            for (let i = 0; i < col.length; i++) {
+                let element = col[i];
+                element.style.backgroundColor = "white"
+            }
+            event.target.style.backgroundColor = "rgba(255, 255, 0, 0.444)";
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dot {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        let drag = false;
+        document.addEventListener("mousedown", function (event) {
+            let dot = document.createElement("div");
+            dot.className = "dot";
+            document.body.append(dot)
+            dot.style.top = (event.clientY - (dot.offsetHeight / 2)) + "px"
+            dot.style.left = (event.clientX - (dot.offsetWidth / 2)) + "px"
+            drag = true;
+        })
+        document.addEventListener("mousemove", function (event) {
+            if (!drag) return;
+            let dot = document.createElement("div");
+            dot.className = "dot";
+            document.body.append(dot)
+            dot.style.top = (event.clientY - (dot.offsetHeight / 2)) + "px"
+            dot.style.left = (event.clientX - (dot.offsetWidth / 2)) + "px"
+        })
+        document.addEventListener("mouseup", function (event) {
+            drag = false;
+        })
+    </script>
+</body>
+
+</html>

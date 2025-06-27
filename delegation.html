@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list">
+
+    </ul>
+    <button onclick="newItem()">New Item</button>
+    <script>
+        const list = document.getElementById("list");
+        i = 0
+        function newItem() {
+            let li = document.createElement("li");
+            li.textContent = `${++i}. Item`
+            list.append(li);
+        };
+
+        list.addEventListener("click", function (event) {
+            event.target.style.backgroundColor = "yellow"
+        });
+        
+    </script>
+</body>
+</html>

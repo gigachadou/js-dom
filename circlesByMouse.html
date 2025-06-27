@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .round {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 3px solid rgb(249, 142, 103);
+            border-radius: 100%;
+            background-color: rgba(254, 147, 108, 0.227);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        document.addEventListener("mousemove", function (event) {
+            let div = document.createElement("div");
+            div.className = "round";
+            document.body.append(div);
+            div.style.top = (event.clientY - (div.offsetHeight / 2)) + "px"
+            div.style.left = (event.clientX - (div.offsetWidth / 2)) + "px"
+            setTimeout(()=>div.remove(), 500);
+        });
+    </script>
+</body>
+</html>

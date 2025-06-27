@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .round {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 3px solid rgb(249, 142, 103);
+            border-radius: 100%;
+            background-color: rgba(254, 147, 108, 0.227);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="round"></div>
+    <div class="round"></div>
+    <div class="round"></div>
+    <div class="round"></div>
+    <div class="round"></div>
+    <script>
+        let drag = false;
+        document.addEventListener("mousedown", function (event) {
+            if (event.target.className == "round") {
+                event.target.style.top = (event.clientY - (event.target.offsetHeight / 2)) + "px"
+                event.target.style.left = (event.clientX - (event.target.offsetWidth / 2)) + "px"
+                drag = true;
+            }
+        })
+        document.addEventListener("mousemove", function (event) {
+            if(!drag) return;
+            if (event.target.className == "round") {
+                event.target.style.top = (event.clientY - (event.target.offsetHeight / 2)) + "px"
+                event.target.style.left = (event.clientX - (event.target.offsetWidth / 2)) + "px"
+            }
+        })
+        document.addEventListener("mouseup", function (event) {
+            if (event.target.className == "round") {
+                event.target.style.top = (event.clientY - (event.target.offsetHeight / 2)) + "px"
+                event.target.style.left = (event.clientX - (event.target.offsetWidth / 2)) + "px"
+                drag = false;
+            }
+        })
+    </script>
+</body>
+
+</html>
