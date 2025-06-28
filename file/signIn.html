@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #error {
+            color: red;
+            text-align: center;
+        }
+
+        .form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #username,
+        #mail,
+        #password,
+        #confirmPassword {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #submit:hover {
+            background-color: #3367D6;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .login-link a {
+            color: #4285F4;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="form">
+        <h2>Create Account</h2>
+        <input id="username" name="username" type="text" placeholder="username" required>
+        <input id="mail" name="mail" type="text" placeholder="mail" required>
+        <input id="password" name="password" type="password" placeholder="password" required minlength="6">
+        <input id="confirmPassword" name="password" type="password" placeholder="confirm password" required>
+
+        <button id="submit" type="submit">Submit</button>
+        <p id="error" style="display: none;"></p>
+        <div class="login-link">
+            <a href="/logIn.html">Already have an account?</a>
+        </div>
+    </form>
+    <script>
+        
+        const err = document.getElementById("error")
+        window.onerror = function (message, source, lineno, colno, error) {
+            err.textContent = error.message;
+            err.style.display = "block";
+            return true;
+        };
+
+        const formEl = document.querySelector(".form");
+
+        let username = document.getElementById("username");
+        let mail = document.getElementById("mail");
+        let password = document.getElementById("password");
+        let confirmPassword = document.getElementById("confirmPassword");
+
+        function check(name, existingArray, type) {
+            if (!existingArray) {
+                localStorage.setItem("stored" + type, JSON.stringify([]));
+                existingArray = JSON.parse(localStorage.getItem("stored" + type));
+            }
+            const existingSet = new Set(existingArray);
+            if (!existingSet.has(name)) {
+                let addition = JSON.parse(localStorage.getItem("stored" + type))
+                addition.push(name)
+                localStorage.setItem("stored" + type, JSON.stringify(addition))
+                return true
+            }
+            return false
+        }
+
+        function generateId(existingCodes = JSON.parse(localStorage.getItem("storedId"))) {
+            if (!existingCodes) {
+                localStorage.setItem("storedId", JSON.stringify([]));
+                existingCodes = JSON.parse(localStorage.getItem("storedId"))
+            }
+            const existingSet = new Set(existingCodes);
+            let attempts = 0;
+            const maxAttempts = 1000;
+
+
+
+            while (attempts < maxAttempts) {
+                const code = Math.floor(10000000 + Math.random() * 90000000).toString();
+                if (!existingSet.has(code)) {
+                    let usedId = JSON.parse(localStorage.getItem("storedId"))
+                    usedId.push(code)
+                    localStorage.setItem("storedId", JSON.stringify(usedId))
+                    return code;
+                }
+                attempts++;
+            }
+
+            throw new Error('Unable to generate a unique 8-digit code after multiple attempts');
+        }
+
+        formEl.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (password.value !== confirmPassword.value) throw new Error("Password is not confirmed properly!");
+
+            if (!check(mail.value, JSON.parse(localStorage.getItem("storedMail")), "Mail")) throw new Error("Mail is not available");
+
+            const formData = new FormData(formEl);
+            const data = Object.fromEntries(formData);      
+
+            try {
+                data.id = generateId();
+            } catch (error) {
+                throw error
+            }
+
+            localStorage.setItem(mail.value, JSON.stringify(data));
+
+            formEl.reset();
+            alert("Registration successful!");
+            location.reload();
+
+        });
+
+    </script>
+</body>
+
+</html>

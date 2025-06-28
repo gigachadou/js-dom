@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-btn:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+
+        .signin-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .signin-link a {
+            color: #4285F4;
+            text-decoration: none;
+        }
+
+        .signin-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form" class="login-container">
+        <h2>Log In</h2>
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="mail" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required minlength="6">
+        </div>
+        <button id="btn" type="submit" class="login-btn">Enter</button>
+        <div>
+            <p class="error" id="error"></p>
+        </div>
+        <div class="signin-link">
+            <a href="./signIn.html">Create a new account</a>
+        </div>
+    </form>
+
+    <script>
+        const err = document.getElementById("error");
+        window.onerror = function (message, source, lineno, colno, error) {
+            err.textContent = error.message;
+            err.style.display = "block";
+            return true;
+        };
+
+        const form = document.getElementById("form")
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            const checkMail = JSON.parse(localStorage.getItem(data.mail))
+            if (!checkMail || typeof checkMail !== "object") {
+                throw new Error("Mail does not exist!");
+            };
+
+            if (data.password !== checkMail.password) throw new Error("Wrong password!")
+
+            form.reset();
+            alert("Logged in");
+            location.reload();
+        })
+    </script>
+</body>
+
+</html>
